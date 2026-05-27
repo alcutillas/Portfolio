@@ -1,13 +1,17 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Variable.woff2') format('woff2');
+  font-weight: 300 900;
+  font-style: normal;
+}
+
 :root {
 
   --color-primary: #8708ff;
   --color-secondary: #cc00ff;
   --color-dark: #050510;
-
-
-
   --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;
@@ -21,7 +25,7 @@
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Satoshi', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);
@@ -60,23 +64,24 @@
 }
 
 body {
-  margin: 0;
+  overflow: hidden;
+  scrollbar-width: none;
+}
+
+*{
+    font-family: 'Satoshi', Roboto, sans-serif;
+}
+
+main{
+  width: 100%;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-body {
-  overflow: hidden;
-}
-
 main::-webkit-scrollbar {
   display: none;
-}
-
-main {
-  scrollbar-width: none;
 }
 
 #root {
@@ -92,13 +97,13 @@ main {
 
 h1,
 h2 {
-  font-family: var(--heading);
   font-weight: 500;
+  text-transform: uppercase;
 }
 
 h1 {
   font-size: 56px;
-  letter-spacing: -1.68px;
+  letter-spacing: -1px;
   margin: 32px 0;
   @media (max-width: 1024px) {
     font-size: 36px;
@@ -106,12 +111,12 @@ h1 {
   }
 }
 h2 {
-  font-size: 24px;
+  font-size: 34px;
   line-height: 118%;
   letter-spacing: -0.24px;
   margin: 0 0 8px;
   @media (max-width: 1024px) {
-    font-size: 20px;
+    font-size: 24px;
   }
 }
 p {
@@ -120,7 +125,6 @@ p {
 
 code,
 .counter {
-  font-family: var(--mono);
   display: inline-flex;
   border-radius: 4px;
   color: var(--text-h);
@@ -202,8 +206,7 @@ code {
 
 .cta span {
   position: relative;
-  font-family: "Ubuntu", sans-serif;
-  font-size: 18px;
+  font-size: 22px;
   letter-spacing: 0.05em;
   color: white;
 }

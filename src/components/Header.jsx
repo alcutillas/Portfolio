@@ -13,9 +13,9 @@ export default function Header() {
             key={item.to}
             to={item.to}
             className={({ isActive }) =>
-              `rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 uppercase ${
+              `rounded-full w-30 h-8 flex items-center justify-center text-sm font-medium transition-all duration-300 uppercase ${
                 isActive
-                  ? "bg-violet-600 text-white shadow-[0_0_10px_rgba(139,92,246,0.55)]"
+                  ? "bg-violet-600 text-white shadow-[0_0_10px_rgba(139,92,246,0.55)] mx-3 sm:mx-10"
                   : "text-slate-500 hover:bg-white/10 hover:text-violet-600"
               }`
             }

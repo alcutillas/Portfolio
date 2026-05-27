@@ -11,12 +11,10 @@ export default function Hero() {
       <div className="relative max-w-7xl mx-auto min-h-screen grid grid-cols-1 lg:grid-cols-2 align-middle">
         <div className="flex flex-col gap-4 justify-center items-center text-left">
             
-          <p className="inline-flex items-center gap-2 rounded-full border border-violet-600 px-3 py-1 text-s uppercase tracking-[0.35em] text-white bg-white/5 backdrop-blur w-fit">
+          <p className="inline-flex items-center gap-2 rounded-full border border-violet-600 px-3 py-1 text-xs uppercase tracking-[0.35em] text-white w-fit">
             <span className="text-violet-400 text-sm">&lt;/&gt;</span>
 
-            <span className="h-5 w-px bg-white/30"></span>
-
-            Desarrollador Web
+            WEB Developer
           </p>
 
           <h1 className="text-4xl md:text-7xl font-bold leading-tight">
@@ -70,7 +68,7 @@ export default function Hero() {
           <div className="absolute bottom-40 right-0 bg-black/50 border border-white/10 rounded-2xl p-5 backdrop-blur">
             <p className="text-sm text-slate-400 mb-3">Hero.jsx</p>
             <pre className="text-sm text-violet-300">
-              {'export default function Experience()'}
+              {'export default function Experience ( )'}
             </pre>
           </div>
          
