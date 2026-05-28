@@ -104,7 +104,6 @@ h2 {
 h1 {
   font-size: 56px;
   letter-spacing: -1px;
-  margin: 32px 0;
   @media (max-width: 1024px) {
     font-size: 36px;
     margin: 20px 0;
@@ -112,9 +111,8 @@ h1 {
 }
 h2 {
   font-size: 34px;
-  line-height: 118%;
   letter-spacing: -0.24px;
-  margin: 0 0 8px;
+  margin: 0 0 3px;
   @media (max-width: 1024px) {
     font-size: 24px;
   }
@@ -181,7 +179,7 @@ code {
 /* From Uiverse.io by alexmaracinaru */ 
 .cta {
   position: relative;
-  padding: 12px 18px;
+  padding: 10px 18px;
   transition: all 0.2s ease;
   border: none;
   background: none;

@@ -1,11 +1,15 @@
 import Hero from "../components/Hero"
 import Technologies from "../components/Technologies"
 
+
 import { motion } from "framer-motion"
 
 export default function Home() {
   return (
-    <main className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth scrollbar-hide">
+    <main
+     id="page-scroll"
+     className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth scrollbar-hide"
+    >
 
       <section className="h-screen snap-start">
         <motion.section
@@ -37,3 +41,18 @@ export default function Home() {
     </main>
   )
 }
+
+
+/*
+export default function Home() {
+  return (
+    <main
+     id="page-scroll"
+     className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth scrollbar-hide"
+    >
+        <Hero />
+        <Technologies />
+    </main>
+  )
+}
+  */

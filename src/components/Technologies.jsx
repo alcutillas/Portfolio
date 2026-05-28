@@ -16,21 +16,14 @@ const technologies = [
   { name: "HTML", image: "/technologies/html.webp" },
   { name: "CSS", image: "/technologies/css.webp" },
   { name: "JavaScript", image: "/technologies/js.webp" },
-  { name: "TypeScript", image: "/technologies/ts.webp" },
   { name: "React", image: "/technologies/react.webp" },
   { name: "PHP", image: "/technologies/php.webp" },
   { name: "Tailwind", image: "/technologies/tailwind.webp" },
   { name: "SQL", image: "/technologies/sql.webp" },
   { name: "Git & GitHub",image: "/technologies/github.webp" },
-  { name: "Figma", image: "/technologies/figma.webp" },
-  { name: "jQuery", image: "/technologies/jquery.webp" },
-  { name: "Bootstrap", image: "/technologies/bootstrap.webp" },
   { name: "Java", image: "/technologies/java.webp" },
   { name: "Docker", image: "/technologies/docker.webp" },
-  { name: "Nginx", image: "/technologies/nginx.webp" },
-  { name: "AWS", image: "/technologies/aws.webp" },
   { name: "WordPress", image: "/technologies/wp.webp" },
-  { name: "Windows Server", image: "/technologies/winserver.webp" },
 ]
 
 export default function Technologies() {
