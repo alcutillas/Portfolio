@@ -1,48 +1,42 @@
 import { Link } from "react-router-dom";
-import { Send } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion, useAnimation } from "framer-motion";
 import { useState, useEffect, useCallback } from "react";
 
-// Teclas que producen texto visible en el display
 const TYPEABLE = new Set([
-  "Q","W","E","R","T","Y","U","I","O","P",
-  "A","S","D","F","G","H","J","K","L",
-  "Z","X","C","V","B","N","M",
-  "1","2","3","4","5","6","7","8","9","0",
+  "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
+  "A", "S", "D", "F", "G", "H", "J", "K", "L",
+  "Z", "X", "C", "V", "B", "N", "M",
+  "1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
 ]);
+
+const TYPEWRITER_PHRASES = [
+  "Hola, soy Álvaro",
+  "npm run dev",
+  "const dev = true",
+  "<WebDeveloper />",
+  "git push origin main",
+];
 
 function Key({ children, style = {}, delay = 0, onPress }) {
   const controls = useAnimation();
 
-  // Animación idle: flotación suave
   useEffect(() => {
     controls.start({
-      y: [0, -3, 0],
-      transition: {
-        duration: 2.6,
-        repeat: Infinity,
-        delay,
-        ease: "easeInOut",
-      },
+      y: [0, -2, 0],
+      transition: { duration: 2.0, repeat: Infinity, delay, ease: "easeInOut" },
     });
   }, [controls, delay]);
 
   const handlePress = useCallback(async () => {
-    // Cancela idle, simula pulsación física: baja rápido, sube con rebote
     controls.stop();
     await controls.start({
       y: [0, 5, -2, 0],
       transition: { duration: 0.18, ease: "easeOut" },
     });
-    // Retoma idle
     controls.start({
-      y: [0, -3, 0],
-      transition: {
-        duration: 2.6,
-        repeat: Infinity,
-        delay: 0,
-        ease: "easeInOut",
-      },
+      y: [0, -2, 0],
+      transition: { duration: 2.6, repeat: Infinity, ease: "easeInOut" },
     });
     onPress?.();
   }, [controls, onPress]);
@@ -50,7 +44,7 @@ function Key({ children, style = {}, delay = 0, onPress }) {
   return (
     <motion.div
       animate={controls}
-      className="flex items-center justify-center rounded-lg bg-[#090414] text-[10px] font-black text-violet-300 select-none cursor-pointer"
+      className="flex cursor-pointer select-none items-center justify-center rounded-lg bg-[#090414] text-[10px] font-black text-violet-300"
       style={{
         height: "2.4rem",
         boxShadow: "0 6px 0 rgba(76,29,149,0.85), 0 8px 16px rgba(0,0,0,0.5)",
@@ -58,10 +52,7 @@ function Key({ children, style = {}, delay = 0, onPress }) {
       }}
       onHoverStart={() => {
         controls.stop();
-        controls.start({
-          y: -6,
-          transition: { duration: 0.15, ease: "easeOut" },
-        });
+        controls.start({ y: -6, transition: { duration: 0.15, ease: "easeOut" } });
       }}
       onHoverEnd={() => {
         controls.start({
@@ -71,10 +62,7 @@ function Key({ children, style = {}, delay = 0, onPress }) {
       }}
       onTapStart={() => {
         controls.stop();
-        controls.start({
-          y: 5,
-          transition: { duration: 0.08, ease: "easeIn" },
-        });
+        controls.start({ y: 5, transition: { duration: 0.08, ease: "easeIn" } });
       }}
       onTap={handlePress}
       onTapCancel={() => {
@@ -93,27 +81,67 @@ function Key({ children, style = {}, delay = 0, onPress }) {
   );
 }
 
+function useTypewriter(active) {
+  const [display, setDisplay] = useState("");
+
+  useEffect(() => {
+    if (!active) {
+      setDisplay("");
+      return;
+    }
+
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+    let timeoutId;
+
+    const tick = () => {
+      const phrase = TYPEWRITER_PHRASES[phraseIndex];
+
+      if (!deleting) {
+        charIndex += 1;
+        setDisplay(phrase.slice(0, charIndex));
+        if (charIndex === phrase.length) {
+          deleting = true;
+          timeoutId = setTimeout(tick, 1800);
+          return;
+        }
+        timeoutId = setTimeout(tick, 55 + Math.random() * 45);
+      } else {
+        charIndex -= 1;
+        setDisplay(phrase.slice(0, charIndex));
+        if (charIndex === 0) {
+          deleting = false;
+          phraseIndex = (phraseIndex + 1) % TYPEWRITER_PHRASES.length;
+          timeoutId = setTimeout(tick, 400);
+          return;
+        }
+        timeoutId = setTimeout(tick, 28);
+      }
+    };
+
+    timeoutId = setTimeout(tick, 500);
+    return () => clearTimeout(timeoutId);
+  }, [active]);
+
+  return display;
+}
+
 function TypeDisplay({ typed }) {
   const isEmpty = typed.length === 0;
+  const typewriterText = useTypewriter(isEmpty);
 
   return (
     <div className="relative mb-3 overflow-hidden rounded-xl border border-violet-500/25 bg-[#06030f] px-4 py-3 shadow-[0_0_30px_rgba(139,92,246,0.12)]">
       <div className="absolute inset-0 bg-gradient-to-r from-violet-900/10 via-transparent to-transparent" />
-      {/* Scanlines decorativas */}
-      <div
-        className="pointer-events-none absolute inset-0 overflow-hidden rounded-xl opacity-[0.04]"
-        style={{ backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 2px, #fff 2px, #fff 3px)" }}
-      />
-      <div className="relative flex items-center gap-2 min-h-[1.25rem]">
-        <span className="text-[10px] font-mono text-violet-500/60 select-none">›</span>
+      <div className="relative flex min-h-[1.25rem] items-center gap-2">
+        <span className="select-none font-mono text-[10px] text-violet-500/60">›</span>
         <span className="font-mono text-sm tracking-wider">
-          {isEmpty ? (
-            <span className="text-violet-500/30 italic text-xs">escribe algo...</span>
-          ) : (
-            <span className="text-violet-200">{typed}</span>
-          )}
+          <span className={isEmpty ? "text-violet-300/90" : "text-violet-200"}>
+            {(isEmpty ? typewriterText : typed) || "\u00a0"}
+          </span>
           <motion.span
-            className="inline-block w-[2px] h-[14px] bg-violet-400 ml-0.5 align-middle"
+            className="ml-0.5 inline-block h-[14px] w-[2px] align-middle bg-violet-400"
             animate={{ opacity: [1, 0, 1] }}
             transition={{ duration: 0.9, repeat: Infinity }}
           />
@@ -207,12 +235,13 @@ function KeyboardAnimation() {
 
   return (
     <motion.div
-      className="relative mx-auto flex w-full flex-col gap-2 rounded-[2rem] border border-violet-500/20 bg-violet-950/20 p-6 backdrop-blur-xl"
+      className="relative z-10 mx-auto flex w-full max-w-xl flex-col gap-2 rounded-[2rem] border border-violet-500/20 bg-violet-950/20 p-6 backdrop-blur-xl"
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
     >
       <div className="absolute -inset-10 -z-10 rounded-full bg-violet-600/15 blur-3xl" />
-
       <TypeDisplay typed={typed} />
-
       {rows.map((row, rowIndex) => (
         <div key={rowIndex} className="flex gap-1.5">
           {row.map((key, index) => (
@@ -231,68 +260,53 @@ function KeyboardAnimation() {
   );
 }
 
+function scrollToSection(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+}
+
 export default function Hero() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#050510] px-6 text-white">
-      {/* Ambient glow */}
+    <section className="relative flex h-full min-h-0 flex-col justify-center overflow-hidden bg-[#050510] px-6 pt-16 text-white">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-violet-700/20 blur-[120px]" />
-        <div className="absolute right-1/4 bottom-1/4 h-80 w-80 rounded-full bg-purple-600/15 blur-[100px]" />
+        <div className="absolute left-0 top-1/3 h-[500px] w-[500px] rounded-full bg-violet-700/15 blur-[120px]" />
+        <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-purple-600/10 blur-[100px]" />
       </div>
 
-      <div className="relative mx-auto grid min-h-screen max-w-7xl grid-cols-1 items-center gap-12 py-24 lg:grid-cols-2 lg:gap-16">
+      <div className="mx-auto grid w-full max-w-7xl flex-1 items-center gap-12 py-8 lg:grid-cols-2 lg:gap-16">
+        <motion.div
+          className="flex flex-col items-start gap-8 text-left"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <h1 className="m-0 max-w-xl text-4xl font-black uppercase leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
+            Construyendo el futuro de la web
+          </h1>
+          <p className="max-w-lg text-base leading-relaxed text-slate-400 md:text-lg">
+            Desarrollador web full stack especializado en experiencias digitales
+            escalables, interfaces modernas con React y backends con PHP y Java.
+            Álvaro Cutillas López.
+          </p>
 
-        {/* Left column */}
-        <div className="relative z-10 flex flex-col items-start gap-12">
-
-          {/* Badge */}
-          <span className="inline-flex items-center gap-3 rounded-full border border-violet-600/60 bg-violet-950/40 px-4 py-2 text-xs uppercase tracking-[0.35em] text-violet-300 shadow-[0_0_20px_rgba(139,92,246,0.2)] backdrop-blur-sm">
-            <span className="text-violet-400">&lt;/&gt;</span>
-            Web Developer
-          </span>
-
-          {/* Name */}
-          <div className="flex items-end p-0 gap-5">
-            <h1 className="m-0 text-5xl uppercase md:text-7xl">
-              Álvaro
-            </h1>
-            <h2 className="m-0 text-violet-600 text-5xl font-black uppercase leading-none tracking-tight md:text-7xl">
-              Cutillas López
-            </h2>
-          </div>
-
-
-          {/* CTAs */}
-          <div className="flex flex-row items-center gap-8">
-            <Link to="/trabajos" className="cta">
-              <span>Ver trabajos</span>
-              <svg width="15px" height="10px" viewBox="0 0 13 10">
-                <path d="M1,5 L11,5"></path>
-                <polyline points="8 1 12 5 8 9"></polyline>
-              </svg>
+          <div className="flex flex-wrap items-center gap-4">
+            <Link
+              to="/trabajos"
+              className="rounded-lg bg-violet-500 px-6 py-3 text-sm font-bold text-[#050510] transition-colors hover:bg-violet-400"
+            >
+              Ver mis trabajos
             </Link>
-
-            <Link to="/contacto" className="btn-to-contact">
-              <span>
-                Contactar
-                <Send size={18} />
-              </span>
-            </Link>
+            <button
+              type="button"
+              onClick={() => scrollToSection("contacto")}
+              className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-white/15 px-6 py-3 text-sm font-bold text-white transition-colors hover:border-violet-500/50 hover:text-violet-300"
+            >
+              Hablemos
+              <ArrowRight size={16} />
+            </button>
           </div>
+        </motion.div>
 
-        </div>
-
-        {/* Right column — keyboard */}
-        <div className="relative flex-col hidden items-center justify-center lg:flex">
-          {/* Photo card */}
-          <div className="relative w-full max-w-sm overflow-hidden rounded-[2rem] border border-violet-500/30 bg-white/[0.03] p-3 shadow-[0_0_50px_rgba(139,92,246,0.2)] backdrop-blur-xl">
-            <div className="absolute inset-0 bg-gradient-to-br from-violet-600/15 via-transparent to-transparent" />
-            <img
-              src="/fotopresentacion.jpg"
-              alt="Álvaro Cutillas López"
-              className="relative h-64 w-full rounded-[1.5rem] object-cover object-top"
-            />
-          </div>
+        <div className="relative z-10 hidden items-center justify-center lg:flex">
           <KeyboardAnimation />
         </div>
       </div>

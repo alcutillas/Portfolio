@@ -1,58 +1,50 @@
-import Hero from "../components/Hero"
-import Technologies from "../components/Technologies"
-
-
-import { motion } from "framer-motion"
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import Hero from "../components/Hero";
+import FeaturedProjects from "../components/FeaturedProjects";
+import Technologies from "../components/Technologies";
+import About from "../components/About";
+import Contact from "../components/Contact";
+import Footer from "../components/Footer";
 
 export default function Home() {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (!hash) return;
+    const id = hash.replace("#", "");
+    const timer = setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }, 150);
+    return () => clearTimeout(timer);
+  }, [hash]);
+
   return (
     <main
-     id="page-scroll"
-     className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth scrollbar-hide"
+      id="page-scroll"
+      className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth bg-[#050510] scrollbar-hide"
     >
-
-      <section className="h-screen snap-start">
-        <motion.section
-        className="h-screen snap-start"
-        initial={{ opacity: 1, scale: 1, y: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{
-            duration: 1.8,
-            ease: [0.16, 1, 0.3, 1]
-        }}
-        >
+      <section className="h-screen shrink-0 snap-start snap-always">
         <Hero />
-        </motion.section>
       </section>
 
-      <motion.section
-        className="h-screen snap-start"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{
-            duration: 1.8,
-            ease: [0.16, 1, 0.3, 1]
-        }}
-        viewport={{ once: false, amount: 0.40 }}
-        >
+      <section className="h-screen shrink-0 snap-start snap-always">
+        <FeaturedProjects />
+      </section>
+
+      <section className="h-screen shrink-0 snap-start snap-always">
         <Technologies />
-        </motion.section>
+      </section>
 
+      <section className="min-h-screen shrink-0 snap-start snap-always">
+        <About />
+      </section>
+
+      <section className="h-screen shrink-0 snap-start snap-always">
+        <Contact />
+      </section>
+
+      <Footer />
     </main>
-  )
+  );
 }
-
-
-/*
-export default function Home() {
-  return (
-    <main
-     id="page-scroll"
-     className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth scrollbar-hide"
-    >
-        <Hero />
-        <Technologies />
-    </main>
-  )
-}
-  */
