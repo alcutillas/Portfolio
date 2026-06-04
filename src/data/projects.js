@@ -3,19 +3,19 @@ export const projects = [
     id: "portfolio",
     title: "Portfolio personal",
     description:
-      "Sitio web interactivo con animaciones, scroll por secciones y diseño responsive. Pensado para mostrar proyectos y stack de forma clara.",
-    technologies: ["React", "Vite", "Tailwind CSS", "Framer Motion"],
+      "Sitio web interactivo con animaciones, scroll por secciones. Pensado para mostrar mis proyectos y conocimientos de forma clara.",
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
     preview: "/works/portfolio-preview.webp",
-    url: "#",
+    url: "/",
   },
   {
     id: "ecommerce",
     title: "Tienda online",
     description:
-      "Catálogo de productos, carrito y panel de administración. Backend con API REST y base de datos relacional.",
-    technologies: ["React", "PHP", "MySQL", "Tailwind CSS"],
-    preview: "/works/ecommerce-preview.webp",
-    url: "#",
+      "Catálogo de productos, carrito y panel de administración. Conexión a Stripe como pasarela de pago.",
+    technologies: ["JavaScript", "PHP", "Tailwind CSS"],
+    preview: "/works/fit-preview.webp",
+    url: "fithouse.es",
   },
   {
     id: "dashboard",

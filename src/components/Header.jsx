@@ -63,8 +63,7 @@ function FloatingHeader() {
           setDragging(false);
         }, 50);
       }}
-      initial={{ x: 24, y: "-50%" }}
-      className={`fixed left-6 top-1/2 z-50 -translate-y-1/2 ${
+      className={`fixed right-12 top-12 z-50 ${
         open ? "cursor-default" : "cursor-grab active:cursor-grabbing"
       }`}
     >

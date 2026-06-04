@@ -31,17 +31,13 @@ function ProjectCard({ project, className = "", large = false }) {
           <img
             src={project.preview}
             alt=""
-            className="h-full w-full object-cover object-top opacity-90 transition-transform duration-500 group-hover:scale-[1.02]"
+            className="h-full w-full object-cover object-center opacity-90 transition-transform duration-500 group-hover:scale-[1.02]"
             onError={(e) => {
               e.currentTarget.style.display = "none";
             }}
           />
         )}
-        <div className="absolute inset-0 flex items-center justify-center p-4">
-          <p className="text-center text-xs font-bold uppercase tracking-widest text-white/40 md:text-sm">
-            {project.title}
-          </p>
-        </div>
+        
         <div className="absolute bottom-3 right-3 flex max-w-[85%] flex-wrap justify-end gap-1.5">
           {project.technologies.slice(0, 3).map((t) => (
             <Tag key={t}>{t}</Tag>

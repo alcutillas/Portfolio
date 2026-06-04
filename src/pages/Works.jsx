@@ -35,7 +35,7 @@ function ProjectPreview({ project }) {
         <img
           src={project.preview}
           alt={`Vista previa de ${project.title}`}
-          className={`relative h-full w-full object-cover object-top transition-opacity duration-500 ${
+          className={`relative h-full w-full object-cover object-center transition-all duration-500 hover:scale-105  ${
             imageOk ? "opacity-100" : "opacity-0"
           }`}
           onLoad={() => setImageOk(true)}
@@ -102,7 +102,13 @@ function ProjectSlide({ project }) {
       </div>
 
       <div className="min-h-0 flex-[1] px-6 pb-8 pt-2 md:px-12 md:pb-12">
+        <a
+            href={project.url}
+            target="_blank"
+            rel="noreferrer"
+        >
         <ProjectPreview project={project} />
+        </a>
       </div>
     </div>
   );
@@ -190,16 +196,9 @@ export default function Works() {
         else goTo(index - 1);
       }}
     >
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/3 top-0 h-96 w-96 rounded-full bg-violet-700/15 blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 h-80 w-80 rounded-full bg-purple-600/10 blur-[100px]" />
-      </div>
 
-      <div className="absolute left-6 top-8 z-20 md:left-12">
+      <div className="absolute left-6 top-12 z-20 md:left-12">
         <h1 className="text-violet-600">Trabajos</h1>
-        <p className="mt-1 text-xs uppercase tracking-[0.25em] text-slate-500">
-          {index + 1} / {projects.length}
-        </p>
       </div>
 
       <div className="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 gap-2">
@@ -218,7 +217,7 @@ export default function Works() {
         ))}
       </div>
 
-      <p className="absolute bottom-8 right-6 z-20 hidden text-[10px] uppercase tracking-[0.2em] text-slate-600 md:block">
+      <p className="absolute bottom-6 right-12 z-20 hidden text-[10px] uppercase tracking-[0.2em] text-slate-600 md:block">
         Scroll para cambiar
       </p>
 

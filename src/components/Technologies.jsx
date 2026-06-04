@@ -78,7 +78,7 @@ function TechIcon({ tech }) {
   return (
     <motion.div
       whileHover={{ y: -4, scale: 1.02 }}
-      className="group flex items-center gap-3 rounded-xl border border-white/10 bg-[#0c0a14]/80 px-3 py-3 transition-colors hover:border-violet-500/35 hover:bg-violet-950/30"
+      className="group flex items-center gap-3 rounded-xl p-1 transition-colors hover:border-violet-500/35 hover:bg-violet-950/30"
     >
       <div
         className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-white/5 ${tech.bg}`}
@@ -98,9 +98,9 @@ export default function Technologies() {
       id="stack"
       className="relative flex h-full max-h-[100vh] flex-col overflow-hidden border-t border-white/5 bg-[#050510] px-6 pt-24 pb-8  text-white"
     >
-      <div className="pointer-events-none absolute right-0 top-1/4 h-80 w-80 rounded-full bg-violet-700/10 blur-[100px]" />
 
-      <div className="relative mx-auto flex h-full w-full max-w-7xl flex-col gap-6 lg:gap-8">
+
+      <div className="relative mx-auto flex h-full w-full max-w-7xl flex-col gap-2 lg:gap-4">
         <motion.div
           className="shrink-0 text-left lg:max-w-3xl"
           initial={{ opacity: 0, y: 16 }}
@@ -112,13 +112,13 @@ export default function Technologies() {
             Herramientas del oficio
           </p>
           <h2 className="mt-2 text-2xl font-black uppercase tracking-tight md:text-4xl">
-            Arsenal técnico
+            Desarrollo web
           </h2>
         </motion.div>
 
         <div className="grid min-h-0 flex-1 gap-8 lg:grid-cols-12 lg:gap-10">
           <motion.div
-            className="flex min-h-0 flex-col gap-5 overflow-y-auto pr-1 scrollbar-hide lg:col-span-7"
+            className="flex min-h-0 flex-col gap-5 overflow-y-auto scrollbar-hide lg:col-span-7"
             variants={container}
             initial="hidden"
             whileInView="show"
@@ -128,7 +128,7 @@ export default function Technologies() {
               <motion.div
                 key={cat.id}
                 variants={item}
-                className="h-full rounded-2xl border border-white/10 bg-[#0a0812]/60 p-3 backdrop-blur-sm md:p-4"
+                className="rounded-2xl border border-white/10 bg-[#0a0812]/60 p-3 backdrop-blur-sm md:p-4"
               >
                 <div className="mb-4 flex flex-wrap items-end justify-between gap-2">
                   <div>
@@ -156,7 +156,7 @@ export default function Technologies() {
           </motion.div>
 
           <motion.div
-            className="flex min-h-0 flex-col justify-between gap-6 lg:col-span-5"
+            className="flex min-h-0 flex-col gap-6 lg:col-span-5"
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -171,25 +171,8 @@ export default function Technologies() {
               </p>
               <p className="mt-4 text-left text-sm leading-relaxed text-slate-500">
                 También uso WordPress para sitios gestionables, Docker para entornos
-                reproducibles y Git para un flujo de trabajo ordenado. Priorizo código
-                legible y experiencias fluidas en cualquier dispositivo.
+                reproducibles y Git para un flujo de trabajo ordenado.
               </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              {highlights.map(({ label, icon: Icon }) => (
-                <div
-                  key={label}
-                  className="flex items-start gap-3 rounded-xl border border-white/10 bg-[#0c0a14] p-4"
-                >
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-violet-500/15">
-                    <Icon className="h-4 w-4 text-violet-400" strokeWidth={2} />
-                  </div>
-                  <p className="text-left text-[11px] font-bold uppercase leading-snug tracking-wide text-slate-300">
-                    {label}
-                  </p>
-                </div>
-              ))}
             </div>
 
             <div className="grid grid-cols-3 gap-3 rounded-2xl border border-white/10 bg-[#0c0a14] p-4">
