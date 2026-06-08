@@ -4,7 +4,6 @@ const navLinks = [
   { hash: "proyectos", label: "Proyectos" },
   { hash: "stack", label: "Stack" },
   { hash: "sobre-mi", label: "Sobre mí" },
-  { hash: "contacto", label: "Contacto" },
 ];
 
 function scrollToHash(hash) {

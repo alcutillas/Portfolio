@@ -1,8 +1,43 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 
+const initialForm = { name: "", email: "", type: "web", message: "" };
+
 export default function Contact() {
-  const handleSubmit = (e) => {
+  const [form, setForm] = useState(initialForm);
+  const [status, setStatus] = useState("idle");
+  const [feedback, setFeedback] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setStatus("loading");
+    setFeedback("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        throw new Error(data.error || "No se pudo enviar el mensaje.");
+      }
+
+      setStatus("success");
+      setFeedback("Mensaje enviado. Te responderé pronto.");
+      setForm(initialForm);
+    } catch (err) {
+      setStatus("error");
+      setFeedback(err.message || "Error al enviar. Inténtalo de nuevo.");
+    }
   };
 
   return (
@@ -43,9 +78,12 @@ export default function Contact() {
               <input
                 type="text"
                 name="name"
+                value={form.name}
+                onChange={handleChange}
                 required
+                disabled={status === "loading"}
                 placeholder="Tu nombre"
-                className="w-full rounded-lg border border-white/10 bg-[#050510] px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-slate-600 focus:border-violet-500/50"
+                className="w-full rounded-lg border border-white/10 bg-[#050510] px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-slate-600 focus:border-violet-500/50 disabled:opacity-60"
               />
             </label>
             <label className="block text-left">
@@ -55,9 +93,12 @@ export default function Contact() {
               <input
                 type="email"
                 name="email"
+                value={form.email}
+                onChange={handleChange}
                 required
+                disabled={status === "loading"}
                 placeholder="tu@email.com"
-                className="w-full rounded-lg border border-white/10 bg-[#050510] px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-slate-600 focus:border-violet-500/50"
+                className="w-full rounded-lg border border-white/10 bg-[#050510] px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-slate-600 focus:border-violet-500/50 disabled:opacity-60"
               />
             </label>
           </div>
@@ -68,7 +109,10 @@ export default function Contact() {
             </span>
             <select
               name="type"
-              className="w-full rounded-lg border border-white/10 bg-[#050510] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-violet-500/50"
+              value={form.type}
+              onChange={handleChange}
+              disabled={status === "loading"}
+              className="w-full rounded-lg border border-white/10 bg-[#050510] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-violet-500/50 disabled:opacity-60"
             >
               <option value="web">Desarrollo web</option>
               <option value="ecommerce">E-commerce</option>
@@ -83,18 +127,33 @@ export default function Contact() {
             </span>
             <textarea
               name="message"
+              value={form.message}
+              onChange={handleChange}
               required
+              disabled={status === "loading"}
               rows={4}
               placeholder="Describe tu idea o necesidad..."
-              className="w-full resize-none rounded-lg border border-white/10 bg-[#050510] px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-slate-600 focus:border-violet-500/50"
+              className="w-full resize-none rounded-lg border border-white/10 bg-[#050510] px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-slate-600 focus:border-violet-500/50 disabled:opacity-60"
             />
           </label>
 
+          {feedback && (
+            <p
+              role="status"
+              className={`text-center text-sm ${
+                status === "success" ? "text-emerald-400" : "text-red-400"
+              }`}
+            >
+              {feedback}
+            </p>
+          )}
+
           <button
             type="submit"
-            className="w-full rounded-lg bg-violet-500 py-3.5 text-sm font-bold uppercase tracking-wider text-[#050510] transition-colors hover:bg-violet-400"
+            disabled={status === "loading"}
+            className="w-full rounded-lg bg-violet-500 py-3.5 text-sm font-bold uppercase tracking-wider text-[#050510] transition-colors hover:bg-violet-400 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Iniciar colaboración
+            {status === "loading" ? "Enviando..." : "Iniciar colaboración"}
           </button>
         </motion.form>
       </div>

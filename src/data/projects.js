@@ -9,21 +9,30 @@ export const projects = [
     url: "/",
   },
   {
-    id: "ecommerce",
+    id: "fithouse",
     title: "Tienda online",
     description:
       "Catálogo de productos, carrito y panel de administración. Conexión a Stripe como pasarela de pago.",
     technologies: ["JavaScript", "PHP", "Tailwind CSS"],
     preview: "/works/fit-preview.webp",
-    url: "fithouse.es",
+    url: "https://fithouse.es",
   },
   {
-    id: "dashboard",
-    title: "Panel de gestión",
+    id: "navegatel",
+    title: "Navegatel",
     description:
-      "Dashboard para visualizar métricas y gestionar registros con filtros, tablas y formularios validados.",
-    technologies: ["JavaScript", "React", "SQL", "Docker"],
-    preview: "/works/dashboard-preview.webp",
-    url: "#",
+      "Agencia de marketing y desarrollo con web centrada a SEO, diseño atractivo y ventas con Stripe",
+    technologies: ["TypeScript", "React", "Next", "Tailwind"],
+    preview: "/works/navegatel-preview.webp",
+    url: "https://navegatel.es",
+  },
+  {
+    id: "akotado",
+    title: "Akotado",
+    description:
+      "Empresa dedicada al vallado e instalacion de recintos con la necesidad de tener un sitio web para mostrar sus trabajos y servicios.",
+    technologies: ["WordPress", "Elementor"],
+    preview: "/works/akotado-preview.webp",
+    url: "https://akotado.com",
   },
 ];

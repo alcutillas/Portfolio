@@ -138,11 +138,18 @@ export default function Works() {
 
   const goTo = useCallback(
     (next) => {
-      if (next < 0 || next >= projects.length || locking.current) return;
+      if (locking.current || projects.length === 0) return;
+
+      const total = projects.length;
+      const normalized = ((next % total) + total) % total;
+      if (normalized === index) return;
+
       locking.current = true;
-      setDirection(next > index ? 1 : -1);
-      setIndex(next);
-      setSearchParams({ project: projects[next].id }, { replace: true });
+      const forward =
+        next > index || (index === total - 1 && normalized === 0);
+      setDirection(forward ? 1 : -1);
+      setIndex(normalized);
+      setSearchParams({ project: projects[normalized].id }, { replace: true });
       setTimeout(() => {
         locking.current = false;
       }, 900);

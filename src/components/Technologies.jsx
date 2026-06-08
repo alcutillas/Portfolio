@@ -18,13 +18,21 @@ const categories = [
   {
     id: "frontend",
     label: "Frontend",
-    description: "Interfaces rápidas, accesibles y mantenibles.",
+    description: "Bases del desarrollo web en el navegador.",
     items: [
       { name: "HTML", icon: Code2, accent: "text-orange-400", bg: "bg-orange-500/10" },
       { name: "CSS", icon: Palette, accent: "text-sky-400", bg: "bg-sky-500/10" },
       { name: "JavaScript", icon: Braces, accent: "text-amber-300", bg: "bg-amber-500/10" },
-      { name: "React", icon: Atom, accent: "text-cyan-400", bg: "bg-cyan-500/10" },
       { name: "Tailwind", icon: Wind, accent: "text-teal-400", bg: "bg-teal-500/10" },
+    ],
+  },
+  {
+    id: "frameworks",
+    label: "Frameworks",
+    description: "Bibliotecas y metaframeworks para aplicaciones.",
+    items: [
+      { name: "React", icon: Atom, accent: "text-cyan-400", bg: "bg-cyan-500/10" },
+      { name: "Next.js", icon: Layers, accent: "text-white", bg: "bg-white/10" },
     ],
   },
   {
@@ -49,13 +57,6 @@ const categories = [
   },
 ];
 
-const highlights = [
-  { label: "Frontend moderno", icon: Layers },
-  { label: "APIs y bases de datos", icon: Database },
-  { label: "Código versionado", icon: GitBranch },
-  { label: "Despliegue en contenedores", icon: Container },
-];
-
 const container = {
   hidden: { opacity: 0 },
   show: {
@@ -73,12 +74,19 @@ const item = {
   },
 };
 
+const stats = [
+  { value: "12", label: "Tecnologías" },
+  { value: "4", label: "Áreas" },
+  { value: "2+", label: "Años de experiencia" },
+  { value: "10+", label: "Proyectos" },
+];
+
 function TechIcon({ tech }) {
   const Icon = tech.icon;
   return (
     <motion.div
       whileHover={{ y: -4, scale: 1.02 }}
-      className="group flex items-center gap-3 rounded-xl p-1 transition-colors hover:border-violet-500/35 hover:bg-violet-950/30"
+      className="group w-[48%] flex items-center gap-3 rounded-xl p-1 transition-colors hover:border-violet-500/35 hover:bg-violet-950/30"
     >
       <div
         className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-white/5 ${tech.bg}`}
@@ -96,13 +104,11 @@ export default function Technologies() {
   return (
     <section
       id="stack"
-      className="relative flex h-full max-h-[100vh] flex-col overflow-hidden border-t border-white/5 bg-[#050510] px-6 pt-24 pb-8  text-white"
+      className="relative flex h-full min-h-0 flex-col overflow-hidden border-t border-white/5 bg-[#050510] px-6 pt-24 pb-6 text-white"
     >
-
-
-      <div className="relative mx-auto flex h-full w-full max-w-7xl flex-col gap-2 lg:gap-4">
+      <div className="relative mx-auto flex h-full min-h-0 w-full max-w-7xl flex-col gap-4">
         <motion.div
-          className="shrink-0 text-left lg:max-w-3xl"
+          className="shrink-0 text-left"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -116,81 +122,52 @@ export default function Technologies() {
           </h2>
         </motion.div>
 
-        <div className="grid min-h-0 flex-1 gap-8 lg:grid-cols-12 lg:gap-10">
-          <motion.div
-            className="flex min-h-0 flex-col gap-5 overflow-y-auto scrollbar-hide lg:col-span-7"
-            variants={container}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.1 }}
-          >
-            {categories.map((cat) => (
-              <motion.div
-                key={cat.id}
-                variants={item}
-                className="rounded-2xl border border-white/10 bg-[#0a0812]/60 p-3 backdrop-blur-sm md:p-4"
-              >
-                <div className="mb-4 flex flex-wrap items-end justify-between gap-2">
-                  <div>
-                    <h3 className="text-sm font-black uppercase tracking-[0.2em] text-violet-400">
-                      {cat.label}
-                    </h3>
-                    <p className="mt-1 text-xs text-slate-500">{cat.description}</p>
-                  </div>
-                </div>
-                <motion.div
-                  className="grid grid-cols-2 gap-2 sm:grid-cols-3"
-                  variants={container}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true }}
-                >
-                  {cat.items.map((tech) => (
-                    <motion.div key={tech.name} variants={item}>
-                      <TechIcon tech={tech} />
-                    </motion.div>
-                  ))}
-                </motion.div>
-              </motion.div>
+        <motion.div
+          className="grid min-h-0 grid-cols-1 grid-rows-4 gap-3 auto-rows-fr md:grid-cols-2 md:grid-rows-2 md:gap-4"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          {categories.map((cat) => (
+            <motion.div
+              key={cat.id}
+              variants={item}
+              className="flex min-h-0 flex-col rounded-2xl border border-white/10 bg-[#0a0812]/60 p-4 backdrop-blur-sm md:p-5"
+            >
+              <div className="mb-4 shrink-0">
+                <h3 className="text-sm font-black uppercase tracking-[0.2em] text-violet-400">
+                  {cat.label}
+                </h3>
+                <p className="mt-1 text-xs text-slate-500">{cat.description}</p>
+              </div>
+              <div className="flex min-h-0 flex-1 flex-wrap content-start gap-2">
+                {cat.items.map((tech) => (
+                  <TechIcon key={tech.name} tech={tech} />
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <motion.div
+          className="shrink-0 rounded-2xl border border-violet-500/20 bg-violet-950/40 p-3"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+        >
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {stats.map((stat) => (
+              <div key={stat.label} className="flex flex-col items-center justify-center text-center">
+                <p className="text-2xl font-black text-violet-300 md:text-3xl">{stat.value}</p>
+                <p className="mt-1 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                  {stat.label}
+                </p>
+              </div>
             ))}
-          </motion.div>
-
-          <motion.div
-            className="flex min-h-0 flex-col gap-6 lg:col-span-5"
-            initial={{ opacity: 0, x: 24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <div className="rounded-2xl border border-violet-500/20 bg-violet-950/40 p-6 md:p-8">
-              <p className="text-left text-base leading-relaxed text-slate-300 md:text-lg">
-                Trabajo con un stack orientado al{" "}
-                <span className="font-bold text-white">frontend moderno</span> y al backend
-                clásico cuando el proyecto lo requiere: interfaces con React, estilos con
-                Tailwind, APIs con PHP o Java, y datos con SQL.
-              </p>
-              <p className="mt-4 text-left text-sm leading-relaxed text-slate-500">
-                También uso WordPress para sitios gestionables, Docker para entornos
-                reproducibles y Git para un flujo de trabajo ordenado.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-3 gap-3 rounded-2xl border border-white/10 bg-[#0c0a14] p-4">
-              {[
-                { value: "11+", label: "Tecnologías" },
-                { value: "3", label: "Áreas" },
-                { value: "100%", label: "Enfoque web" },
-              ].map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <p className="text-2xl font-black text-violet-400">{stat.value}</p>
-                  <p className="mt-1 text-[10px] font-bold uppercase tracking-wider text-slate-500">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

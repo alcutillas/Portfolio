@@ -5,16 +5,16 @@ export default function About() {
     <section id="sobre-mi" className="flex h-screen flex-col justify-center border-t border-white/5 bg-[#070612] px-6 text-white">
       <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <motion.div
-          className="relative overflow-hidden rounded-2xl border border-white/10 flex justify-center items-center"
+          className="relative overflow-hidden rounded-2xl flex justify-center items-center"
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7 }}
         >
           <img
-            src="/fotopresentacion.png"
+            src="/fotopresentacion.jpg"
             alt="Álvaro Cutillas López"
-            className="relative aspect-[4/5] h-100 object-cover object-top grayscale contrast-[1.05]"
+            className="relative aspect-[4/5] h-110 object-cover object-top rounded-2xl"
           />
         </motion.div>
 

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const social = [
   { label: "GitHub", href: "https://github.com" },
   { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "Email", href: "mailto:contacto@ejemplo.com" },
+  { label: "Email", href: "mailto:alvaromurada1@gmail.com" },
 ];
 
 export default function Footer() {

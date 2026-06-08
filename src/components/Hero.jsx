@@ -280,11 +280,11 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <h1 className="m-0 max-w-xl text-4xl font-black uppercase leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
-            Construyendo el futuro de la web
+            Desarrollando tu web a medida
           </h1>
           <p className="max-w-lg text-base leading-relaxed text-slate-400 md:text-lg">
             Desarrollador web full stack especializado en experiencias digitales
-            escalables, interfaces modernas con React y backends con PHP y Java.
+            escalables, interfaces modernas con React y diferentesbackends.
             Álvaro Cutillas López.
           </p>
 
