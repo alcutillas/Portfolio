@@ -150,24 +150,7 @@ export default function Technologies() {
           ))}
         </motion.div>
 
-        <motion.div
-          className="shrink-0 rounded-2xl border border-violet-500/20 bg-violet-950/40 p-3"
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-        >
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {stats.map((stat) => (
-              <div key={stat.label} className="flex flex-col items-center justify-center text-center">
-                <p className="text-2xl font-black text-violet-300 md:text-3xl">{stat.value}</p>
-                <p className="mt-1 text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+        
       </div>
     </section>
   );

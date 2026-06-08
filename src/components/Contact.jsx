@@ -1,7 +1,14 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const initialForm = { name: "", email: "", type: "web", message: "" };
+
+const social = [
+  { label: "GitHub", href: "https://github.com" },
+  { label: "LinkedIn", href: "https://linkedin.com" },
+  { label: "Email", href: "mailto:alvaromurada1@gmail.com" },
+];
 
 export default function Contact() {
   const [form, setForm] = useState(initialForm);
@@ -43,7 +50,7 @@ export default function Contact() {
   return (
     <section
       id="contacto"
-      className="flex h-full min-h-0 flex-col justify-center border-t border-white/5 bg-[#070612] px-6 py-16 text-white"
+      className="flex min-h-screen flex-col justify-center border-t border-white/5 bg-[#070612] px-6 py-16 text-white"
     >
       <div className="mx-auto w-full max-w-2xl">
         <motion.div
@@ -156,6 +163,37 @@ export default function Contact() {
             {status === "loading" ? "Enviando..." : "Iniciar colaboración"}
           </button>
         </motion.form>
+
+        <motion.div
+          className="mt-10 flex flex-col items-center justify-between gap-6 border-t border-white/5 pt-8 md:flex-row"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <div className="text-center md:text-left">
+            <Link to="/" className="text-lg font-black tracking-tight">
+              Alvaro<span className="text-violet-500">.dev</span>
+            </Link>
+            <p className="mt-2 text-xs text-slate-500">
+              © {new Date().getFullYear()} Álvaro Cutillas López. Todos los derechos reservados.
+            </p>
+          </div>
+
+          <nav className="flex flex-wrap items-center justify-center gap-6">
+            {social.map(({ label, href }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm text-slate-400 transition-colors hover:text-violet-400"
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
+        </motion.div>
       </div>
     </section>
   );

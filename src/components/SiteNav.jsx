@@ -35,7 +35,9 @@ export default function SiteNav() {
             }
           }}
         >
-          Álvaro Cutillas López
+
+              Alvaro<span className="text-violet-500">.dev</span>
+
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

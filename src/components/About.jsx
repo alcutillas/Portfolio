@@ -42,16 +42,7 @@ export default function About() {
             que funcione bien en producción.
           </p>
 
-          <div className="mt-4 grid grid-cols-2 gap-8 border-t border-white/10 pt-8">
-            <div className="text-left">
-              <p className="text-4xl font-black text-white md:text-5xl">10+</p>
-              <p className="mt-1 text-sm text-slate-500">Proyectos realizados</p>
-            </div>
-            <div className="text-left">
-              <p className="text-4xl font-black text-white md:text-5xl">2+</p>
-              <p className="mt-1 text-sm text-slate-500">Años desarrollando</p>
-            </div>
-          </div>
+          
         </motion.div>
       </div>
     </section>

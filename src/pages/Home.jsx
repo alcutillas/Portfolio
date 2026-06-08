@@ -5,7 +5,6 @@ import FeaturedProjects from "../components/FeaturedProjects";
 import Technologies from "../components/Technologies";
 import About from "../components/About";
 import Contact from "../components/Contact";
-import Footer from "../components/Footer";
 
 export default function Home() {
   const { hash } = useLocation();
@@ -40,11 +39,9 @@ export default function Home() {
         <About />
       </section>
 
-      <section className="h-screen shrink-0 snap-start snap-always">
+      <section className="min-h-screen shrink-0 snap-start snap-always">
         <Contact />
       </section>
-
-      <Footer />
     </main>
   );
 }
