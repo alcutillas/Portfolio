@@ -74,6 +74,14 @@ body {
 
 main{
   width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 767px) {
+  .section-mobile-safe {
+    padding-top: calc(4rem + 1rem);
+    padding-bottom: max(7rem, calc(1.5rem + env(safe-area-inset-bottom, 0px)));
+  }
 }
 
 html {
@@ -104,8 +112,11 @@ h2 {
 h1 {
   font-size: 56px;
   letter-spacing: -1px;
-  @media (max-width: 1024px) {
-    font-size: 36px;
+  @media (max-width: 1080px) {
+    font-size: 40px;
+  }
+  @media (max-width: 520px) {
+    font-size: 30px;
     margin: 20px 0;
   }
 }

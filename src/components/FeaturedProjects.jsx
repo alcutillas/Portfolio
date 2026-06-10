@@ -22,8 +22,8 @@ function ProjectCard({ project, className = "", large = false }) {
       className={`group flex h-full min-h-0 flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0c0a14] transition-colors hover:border-violet-500/40 ${className}`}
     >
       <div
-        className={`relative min-h-0 overflow-hidden bg-gradient-to-br from-violet-950/80 to-[#050510] ${
-          large ? "flex-[1.2]" : "flex-1"
+        className={`relative shrink-0 overflow-hidden bg-gradient-to-br from-violet-950/80 to-[#050510] aspect-[16/10] sm:aspect-[2/1] ${
+          large ? "lg:aspect-auto lg:min-h-0 lg:flex-[1.2]" : "lg:aspect-auto lg:min-h-0 lg:flex-1"
         }`}
       >
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(139,92,246,0.25),transparent_60%)]" />
@@ -68,7 +68,7 @@ function WideProjectCard({ project }) {
       to={projectUrl(project.id)}
       className="group grid h-full min-h-0 overflow-hidden rounded-2xl border border-white/10 bg-[#0c0a14] transition-colors hover:border-violet-500/40 lg:grid-cols-2"
     >
-      <div className="relative min-h-[100px] bg-gradient-to-br from-violet-950/80 to-[#050510] lg:min-h-0">
+      <div className="relative aspect-[16/10] shrink-0 overflow-hidden bg-gradient-to-br from-violet-950/80 to-[#050510] sm:aspect-[2/1] lg:aspect-auto lg:min-h-0">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.2),transparent_70%)]" />
         {project.preview && (
           <img
@@ -110,9 +110,9 @@ export default function FeaturedProjects() {
   return (
     <section
       id="proyectos"
-      className="flex h-full max-h-[100vh] flex-col overflow-hidden bg-[#050510] px-6 pt-24 pb-8 text-white"
+      className="section-mobile-safe flex h-full flex-col py-20 overflow-y-auto overscroll-y-contain bg-[#050510] px-6 text-white lg:overflow-hidden lg:pt-24 lg:pb-8"
     >
-      <div className="mx-auto flex h-full w-full max-w-7xl flex-col gap-10">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 lg:h-full lg:gap-10">
         <motion.div
           className="flex shrink-0 flex-wrap items-end justify-between gap-4"
           initial={{ opacity: 0, y: 16 }}
@@ -137,8 +137,8 @@ export default function FeaturedProjects() {
           </Link>
         </motion.div>
 
-        <div className="grid min-h-0 flex-1 grid-rows-[1fr_minmax(0,38%)] gap-7">
-          <div className="grid min-h-0 gap-7 lg:grid-cols-3">
+        <div className="flex flex-col gap-4 lg:grid lg:min-h-0 lg:flex-1 lg:grid-rows-[1fr_minmax(0,38%)] lg:gap-7">
+          <div className="flex flex-col gap-4 lg:grid lg:min-h-0 lg:grid-cols-3 lg:gap-7">
             <motion.div
               className="min-h-0 lg:col-span-2"
               initial={{ opacity: 0, y: 16 }}

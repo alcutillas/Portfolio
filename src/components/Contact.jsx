@@ -50,7 +50,7 @@ export default function Contact() {
   return (
     <section
       id="contacto"
-      className="flex min-h-screen flex-col justify-center border-t border-white/5 bg-[#070612] px-6 py-16 text-white"
+      className="flex h-full flex-col justify-center overflow-y-auto overscroll-y-contain border-t border-white/5 bg-[#070612] px-6 py-16 text-white lg:overflow-hidden"
     >
       <div className="mx-auto w-full max-w-2xl">
         <motion.div
@@ -60,7 +60,7 @@ export default function Contact() {
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-black uppercase tracking-tight md:text-4xl">
+          <h2 className="text-3xl font-black uppercase tracking-tight pt-20 md:text-4xl">
             Creemos juntos
           </h2>
           <p className="mt-4 text-slate-400">

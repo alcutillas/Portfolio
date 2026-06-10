@@ -62,8 +62,8 @@ function ProjectPreview({ project }) {
 
 function ProjectSlide({ project }) {
   return (
-    <div className="flex h-full min-h-0 flex-col">
-      <div className="flex min-h-0 flex-[1] flex-col justify-center gap-6 px-6 py-8 md:px-12 md:py-10">
+    <div className="flex h-full min-h-0 flex-col py-10">
+      <div className="flex min-h-0 flex-[1] flex-col justify-center gap-4">
         <span className="text-xs font-black uppercase tracking-[0.35em] text-violet-400">
           Proyecto
         </span>
@@ -101,7 +101,7 @@ function ProjectSlide({ project }) {
         )}
       </div>
 
-      <div className="min-h-0 flex-[1] px-6 pb-8 pt-2 md:px-12 md:pb-12">
+      <div className="min-h-0 flex-[1] pb-8 pt-2 md:pb-12">
         <a
             href={project.url}
             target="_blank"
@@ -204,29 +204,30 @@ export default function Works() {
       }}
     >
 
-      <div className="absolute left-6 top-12 z-20 md:left-12">
-        <h1 className="text-violet-600">Trabajos</h1>
-      </div>
 
-      <div className="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 gap-2">
-        {projects.map((p, i) => (
-          <button
-            key={p.id}
-            type="button"
-            aria-label={`Ir a ${p.title}`}
-            onClick={() => goTo(i)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              i === index
-                ? "w-8 bg-violet-500"
-                : "w-2 bg-violet-500/30 hover:bg-violet-500/60"
-            }`}
-          />
-        ))}
+      <div className="absolute inset-x-0 bottom-4 z-20">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-center px-6 md:grid md:grid-cols-[1fr_auto_1fr]">
+          <div className="hidden md:block" aria-hidden />
+          <div className="flex gap-2">
+            {projects.map((p, i) => (
+              <button
+                key={p.id}
+                type="button"
+                aria-label={`Ir a ${p.title}`}
+                onClick={() => goTo(i)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  i === index
+                    ? "w-8 bg-violet-500"
+                    : "w-2 bg-violet-500/30 hover:bg-violet-500/60"
+                }`}
+              />
+            ))}
+          </div>
+          <p className="hidden text-right text-[10px] uppercase tracking-[0.2em] text-slate-400 md:block">
+            Scroll para cambiar
+          </p>
+        </div>
       </div>
-
-      <p className="absolute bottom-6 right-12 z-20 hidden text-[10px] uppercase tracking-[0.2em] text-slate-600 md:block">
-        Scroll para cambiar
-      </p>
 
       <AnimatePresence mode="wait" custom={direction}>
         <motion.div
@@ -240,11 +241,14 @@ export default function Works() {
             x: { type: "spring", stiffness: 280, damping: 32 },
             opacity: { duration: 0.35 },
           }}
-          className="absolute inset-0 pt-20"
+          className="absolute inset-0 pt-16"
         >
-          <ProjectSlide project={project} />
+          <div className="mx-auto flex h-full w-full max-w-7xl flex-col px-6">
+            <ProjectSlide project={project} />
+          </div>
         </motion.div>
       </AnimatePresence>
+
     </main>
   );
 }

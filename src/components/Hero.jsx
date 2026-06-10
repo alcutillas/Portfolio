@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { motion, useAnimation } from "framer-motion";
 import { useState, useEffect, useCallback } from "react";
+import { isMobileNav, navigateHomeSection, scrollToHash } from "../utils/sectionScroll";
 
 const TYPEABLE = new Set([
   "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
@@ -127,12 +128,16 @@ function useTypewriter(active) {
   return display;
 }
 
-function TypeDisplay({ typed }) {
+function TypeDisplay({ typed, screenOnly = false }) {
   const isEmpty = typed.length === 0;
   const typewriterText = useTypewriter(isEmpty);
 
   return (
-    <div className="relative mb-3 overflow-hidden rounded-xl border border-violet-500/25 bg-[#06030f] px-4 py-3 shadow-[0_0_30px_rgba(139,92,246,0.12)]">
+    <div
+      className={`relative overflow-hidden rounded-xl border border-violet-500/25 bg-[#06030f] px-4 py-3 shadow-[0_0_30px_rgba(139,92,246,0.12)] ${
+        screenOnly ? "" : "mb-3"
+      }`}
+    >
       <div className="absolute inset-0 bg-gradient-to-r from-violet-900/10 via-transparent to-transparent" />
       <div className="relative flex min-h-[1.25rem] items-center gap-2">
         <span className="select-none font-mono text-[10px] text-violet-500/60">›</span>
@@ -151,7 +156,7 @@ function TypeDisplay({ typed }) {
   );
 }
 
-function KeyboardAnimation() {
+function KeyboardAnimation({ screenOnly = false }) {
   const [typed, setTyped] = useState("");
 
   const handleKeyPress = useCallback((label) => {
@@ -235,14 +240,17 @@ function KeyboardAnimation() {
 
   return (
     <motion.div
-      className="relative z-10 mx-auto flex w-full max-w-xl flex-col gap-2 rounded-[2rem] border border-violet-500/20 bg-violet-950/20 p-6 backdrop-blur-xl"
+      className={`relative z-10 flex w-full flex-col rounded-[2rem] lg:border border-violet-500/20 lg:bg-violet-950/20 backdrop-blur-xl ${
+        screenOnly ? "max-w-md gap-0 py-4" : "mx-auto max-w-xl gap-2 p-6"
+      }`}
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.2 }}
     >
       <div className="absolute -inset-10 -z-10 rounded-full bg-violet-600/15 blur-3xl" />
-      <TypeDisplay typed={typed} />
-      {rows.map((row, rowIndex) => (
+      <TypeDisplay typed={screenOnly ? "" : typed} screenOnly={screenOnly} />
+      {!screenOnly &&
+        rows.map((row, rowIndex) => (
         <div key={rowIndex} className="flex gap-1.5">
           {row.map((key, index) => (
             <Key
@@ -261,47 +269,56 @@ function KeyboardAnimation() {
 }
 
 function scrollToSection(id) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  if (isMobileNav()) {
+    navigateHomeSection(id);
+    return;
+  }
+  scrollToHash(id);
 }
 
 export default function Hero() {
   return (
-    <section className="relative flex h-full min-h-0 flex-col justify-center overflow-hidden bg-[#050510] px-6 pt-16 text-white">
+    <section className="section-mobile-safe relative flex h-full min-h-0 flex-col justify-center overflow-y-auto overscroll-y-contain bg-[#050510] px-6 text-white lg:overflow-hidden lg:pt-16 lg:pb-8">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-0 top-1/3 h-[500px] w-[500px] rounded-full bg-violet-700/15 blur-[120px]" />
         <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-purple-600/10 blur-[100px]" />
       </div>
 
-      <div className="mx-auto grid w-full max-w-7xl flex-1 items-center gap-12 py-8 lg:grid-cols-2 lg:gap-16">
+      <div className="mx-auto grid w-full max-w-7xl flex-1 items-center gap-8 py-4 lg:grid-cols-2 lg:gap-16 lg:py-8">
         <motion.div
           className="flex flex-col items-start gap-8 text-left"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h1 className="m-0 max-w-xl text-4xl font-black uppercase leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
-            Desarrollando tu web a medida
-          </h1>
+          <div className="flex w-full flex-col items-start gap-3">
+            <div className="max-w-md lg:hidden">
+              <KeyboardAnimation screenOnly />
+            </div>
+            <h1 className="m-0 max-w-xl text-4xl font-black uppercase leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
+              Desarrollando tu web a medida
+            </h1>
+          </div>
           <p className="max-w-lg text-base leading-relaxed text-slate-400 md:text-lg">
             Desarrollador web full stack especializado en experiencias digitales
-            escalables, interfaces modernas con React y diferentesbackends.
+            escalables, interfaces modernas con React y diferentes backends.
             Álvaro Cutillas López.
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
             <Link
               to="/trabajos"
-              className="rounded-lg bg-violet-500 px-6 py-3 text-sm font-bold text-[#050510] transition-colors hover:bg-violet-400"
+              className="rounded-lg bg-violet-500 px-4 py-3 text-sm font-bold text-[#050510] transition-colors hover:bg-violet-400"
             >
               Ver mis trabajos
             </Link>
             <button
               type="button"
               onClick={() => scrollToSection("contacto")}
-              className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-white/15 px-6 py-3 text-sm font-bold text-white transition-colors hover:border-violet-500/50 hover:text-violet-300"
+              className="group inline-flex cursor-pointer items-center gap-2 rounded-lg border border-white/15 px-4 py-3 text-sm font-bold text-white transition-colors hover:border-violet-500/50 hover:text-violet-300"
             >
               Hablemos
-              <ArrowRight size={16} />
+              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
             </button>
           </div>
         </motion.div>

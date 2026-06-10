@@ -86,14 +86,14 @@ function TechIcon({ tech }) {
   return (
     <motion.div
       whileHover={{ y: -4, scale: 1.02 }}
-      className="group w-[48%] flex items-center gap-3 rounded-xl p-1 transition-colors hover:border-violet-500/35 hover:bg-violet-950/30"
+      className="group flex w-full min-w-0 items-center gap-2 rounded-xl p-1 transition-colors hover:border-violet-500/35 hover:bg-violet-950/30 sm:w-[calc(50%-0.25rem)] sm:gap-3"
     >
       <div
-        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-white/5 ${tech.bg}`}
+        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/5 sm:h-11 sm:w-11 ${tech.bg}`}
       >
-        <Icon className={`h-5 w-5 ${tech.accent}`} strokeWidth={2} />
+        <Icon className={`h-4 w-4 sm:h-5 sm:w-5 ${tech.accent}`} strokeWidth={2} />
       </div>
-      <span className="text-xs font-bold uppercase tracking-[0.12em] text-slate-200">
+      <span className="min-w-0 truncate text-[10px] font-bold uppercase tracking-[0.08em] text-slate-200 sm:text-xs sm:tracking-[0.12em]">
         {tech.name}
       </span>
     </motion.div>
@@ -104,11 +104,11 @@ export default function Technologies() {
   return (
     <section
       id="stack"
-      className="relative flex h-full min-h-0 flex-col overflow-hidden border-t border-white/5 bg-[#050510] px-6 pt-24 pb-6 text-white"
+      className="section-mobile-safe relative flex h-full flex-col justify-center overflow-y-auto overscroll-y-contain border-t border-white/5 bg-[#050510] px-6 text-white lg:overflow-hidden lg:pt-24 lg:pb-6"
     >
-      <div className="relative mx-auto flex h-full min-h-0 w-full max-w-7xl flex-col gap-4">
+      <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-4 lg:h-full lg:min-h-0">
         <motion.div
-          className="shrink-0 text-left"
+          className="shrink-0 text-left mt-60 md:mt-0"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -123,7 +123,7 @@ export default function Technologies() {
         </motion.div>
 
         <motion.div
-          className="grid min-h-0 grid-cols-1 grid-rows-4 gap-3 auto-rows-fr md:grid-cols-2 md:grid-rows-2 md:gap-4"
+          className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4 lg:min-h-0 lg:flex-1 lg:grid-rows-2 lg:auto-rows-fr"
           variants={container}
           initial="hidden"
           whileInView="show"
@@ -133,15 +133,15 @@ export default function Technologies() {
             <motion.div
               key={cat.id}
               variants={item}
-              className="flex min-h-0 flex-col rounded-2xl border border-white/10 bg-[#0a0812]/60 p-4 backdrop-blur-sm md:p-5"
+              className="flex flex-col rounded-2xl border border-white/10 bg-[#0a0812]/60 p-4 backdrop-blur-sm md:p-5 lg:min-h-0"
             >
-              <div className="mb-4 shrink-0">
+              <div className="mb-3 shrink-0 sm:mb-4">
                 <h3 className="text-sm font-black uppercase tracking-[0.2em] text-violet-400">
                   {cat.label}
                 </h3>
                 <p className="mt-1 text-xs text-slate-500">{cat.description}</p>
               </div>
-              <div className="flex min-h-0 flex-1 flex-wrap content-start gap-2">
+              <div className="flex flex-wrap content-start gap-2 lg:min-h-0 lg:flex-1">
                 {cat.items.map((tech) => (
                   <TechIcon key={tech.name} tech={tech} />
                 ))}
