@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 const initialForm = { name: "", email: "", type: "web", message: "" };
 
 const social = [
-  { label: "GitHub", href: "https://github.com" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
+  { label: "GitHub", href: "https://github.com/alcutillas" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/alvaro-cutillas-813a0738a" },
   { label: "Email", href: "mailto:alvaromurada1@gmail.com" },
 ];
 
