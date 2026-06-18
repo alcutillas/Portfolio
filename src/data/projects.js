@@ -13,7 +13,7 @@ export const projects = [
     title: "Tienda online",
     description:
       "Catálogo de productos, carrito y panel de administración. Conexión a Stripe como pasarela de pago.",
-    technologies: ["JavaScript", "PHP", "Tailwind CSS"],
+    technologies: ["JavaScript", "PHP", "Tailwind CSS", "SQL"],
     preview: "/works/fit-preview.webp",
     url: "https://fithouse.es",
   },
@@ -34,5 +34,23 @@ export const projects = [
     technologies: ["WordPress", "Elementor"],
     preview: "/works/akotado-preview.webp",
     url: "https://akotado.com",
+  },
+  {
+    id: "citfrut",
+    title: "Citfrut",
+    description:
+      "Empresa dedicada al sector agricola con la necesidad de tener un sitio web para mostrar sus productos y servicios.",
+    technologies: ["WordPress", "Elementor"],
+    preview: "/works/citfrut-preview.jpg",
+    url: "https://citfrut.com",
+  },
+  {
+    id: "gesinder",
+    title: "Gesinder",
+    description:
+      "Empresa experta en inmuebles y soluciones financieras para clientes.",
+    technologies: ["WordPress", "Elementor"],
+    preview: "/works/gesinder-preview.jpg",
+    url: "https://gesinder.com",
   },
 ];
