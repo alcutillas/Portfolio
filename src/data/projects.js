@@ -40,7 +40,7 @@ export const projects = [
     title: "Citfrut",
     description:
       "Empresa dedicada al sector agricola con la necesidad de tener un sitio web para mostrar sus productos y servicios.",
-    technologies: ["WordPress", "Elementor"],
+    technologies: ["TypeScript", "React", "Next", "Tailwind"],
     preview: "/works/citfrut-preview.jpg",
     url: "https://citfrut.com",
   },
