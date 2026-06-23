@@ -286,7 +286,7 @@ export default function Hero() {
 
       <div className="mx-auto grid w-full max-w-7xl flex-1 items-center gap-8 py-4 lg:grid-cols-2 lg:gap-16 lg:py-8">
         <motion.div
-          className="flex flex-col items-start gap-8 text-left"
+          className="flex flex-col items-start gap-2 pt-10 text-left md:pt-0 md:gap-8"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}

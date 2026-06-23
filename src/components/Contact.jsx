@@ -50,9 +50,9 @@ export default function Contact() {
   return (
     <section
       id="contacto"
-      className="flex h-full flex-col justify-center overflow-y-auto overscroll-y-contain border-t border-white/5 bg-[#070612] px-6 py-16 text-white lg:overflow-hidden"
+      className="section-mobile-safe flex h-full min-h-0 flex-col justify-start overflow-y-auto overscroll-y-contain border-t border-white/5 bg-[#070612] px-6 text-white lg:justify-center lg:overflow-hidden lg:pt-24 lg:pb-8"
     >
-      <div className="mx-auto w-full max-w-2xl">
+      <div className="mx-auto w-full max-w-2xl py-4 sm:py-6 lg:py-0">
         <motion.div
           className="mb-8 text-center"
           initial={{ opacity: 0, y: 20 }}
@@ -60,7 +60,7 @@ export default function Contact() {
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-black uppercase tracking-tight pt-20 md:text-4xl">
+          <h2 className="text-3xl font-black uppercase tracking-tight md:text-4xl">
             Creemos juntos
           </h2>
           <p className="mt-4 text-slate-400">

@@ -104,11 +104,11 @@ export default function Technologies() {
   return (
     <section
       id="stack"
-      className="section-mobile-safe relative flex h-full flex-col justify-center overflow-y-auto overscroll-y-contain border-t border-white/5 bg-[#050510] px-6 text-white lg:overflow-hidden lg:pt-24 lg:pb-6"
+      className="section-mobile-safe relative flex h-full min-h-0 flex-col justify-start overflow-y-auto overscroll-y-contain border-t border-white/5 bg-[#050510] px-6 text-white lg:justify-center lg:overflow-hidden lg:pt-24 lg:pb-6"
     >
-      <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-4 lg:h-full lg:min-h-0">
+      <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-4 py-4 sm:gap-5 sm:py-6 lg:h-full lg:min-h-0 lg:py-0">
         <motion.div
-          className="shrink-0 text-left mt-60 md:mt-0"
+          className="shrink-0 text-left "
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

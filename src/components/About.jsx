@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <section id="sobre-mi" className="section-mobile-safe flex h-full flex-col justify-center items-center overflow-y-auto overscroll-y-contain border-t border-white/5 bg-[#070612] px-6 text-white lg:justify-center lg:overflow-hidden lg:py-0">
-      <div className="mx-auto grid w-full max-w-7xl items-center justify-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-16">
+    <section id="sobre-mi" className="section-mobile-safe flex h-full min-h-0 flex-col justify-start items-center overflow-y-auto overscroll-y-contain border-t border-white/5 bg-[#070612] px-6 text-white lg:justify-center lg:overflow-hidden lg:py-0">
+      <div className="mx-auto grid w-full max-w-7xl items-center justify-center gap-8 py-4 sm:gap-10 sm:py-6 lg:grid-cols-2 lg:gap-16 lg:py-0">
         <motion.div
           className="relative mx-auto flex w-full max-w-[220px] items-center justify-center overflow-hidden rounded-2xl sm:max-w-[260px] lg:mx-0 lg:max-w-none"
           initial={{ opacity: 0, x: -30 }}
